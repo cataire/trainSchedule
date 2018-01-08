@@ -1,4 +1,10 @@
 
+  // There is a lot that I wish to add: 
+
+  // current time counting down
+  // map of the system
+  // required fields
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyC57wb14iCyvJH0-Vv1dVbu_rfLI8PpAS4",
