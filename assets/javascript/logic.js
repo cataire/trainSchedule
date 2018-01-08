@@ -11,8 +11,6 @@
   firebase.initializeApp(config);
 
 const database = firebase.database();
-var startOfDay = moment().startOf('day').format("HH:MM");
-console.log(startOfDay);
 
 
 // on button click
@@ -22,7 +20,7 @@ $(".addTrainBtn").on("click", function(event) {
   // Grabs fields input
   var trainNumber = $(".train-name").val().trim();
   var trainDestination = $(".destination").val().trim();
-  var trainFirstDeparture = $(".firstDeparture").val().trim();
+  var trainFirstDeparture = $(".firstDeparture").val();
   var trainFrequency = $(".frequency").val().trim();
   
 
@@ -62,7 +60,7 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey){
   var trainFrequency = childSnapshot.val().trainFrequency;
   var trainFirstDeparture = childSnapshot.val().trainFirstDeparture;
 
-  var timeAfterFirstDeparture = moment(trainFirstDeparture, "HH:MM").diff(moment().format("HH:MM"), "minutes");
+  var timeAfterFirstDeparture = moment().diff(moment(trainFirstDeparture, "X"), "minutes");
   console.log(timeAfterFirstDeparture);
   var remainder = timeAfterFirstDeparture%trainFrequency;
   var minutesAway = trainFrequency - remainder;
@@ -70,6 +68,6 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey){
 
 
   $(".train-schedule > tbody").append("<tr><td>" + trainNumber + "</td><td>" + trainDestination + "</td><td>" +
-  trainFrequency + "</td><td>" + trainFirstDeparture + "</td>");
+  trainFrequency + "</td><td>" + trainFirstDeparture + "</td><td>" + minutesAway + "</td>");
 
 });
