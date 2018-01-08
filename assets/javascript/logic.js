@@ -18,8 +18,14 @@
 
 const database = firebase.database();
 
+// modal function to show the map
+
+ $(".modal-btn").click(function(){
+        $("#myModal").modal();
+    });
 
 // on button click
+
 $(".addTrainBtn").on("click", function(event) {
   event.preventDefault();
 
